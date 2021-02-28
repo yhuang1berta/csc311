@@ -1,0 +1,107 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{ulem}
+
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+\begin{document}
+
+\begin{center}
+\textbf{
+    CSC311\\
+    Assignment 01 (Non-programming)\\
+    Ye Huang\\
+}
+\end{center}
+
+\textrm{\\
+Q4(f).\\
+\indent \indent Let's assume that $\frac{\partial \mathcal{J}}{\partial \omega_j} = \sum_{i=1}^{N} (y^{(i)} - t^{(i)})x^{(i)}_j / N$\\
+\\
+\indent \indent Consider, \\
+\\
+\indent \indent $[X^T(y-t)/N]_j = \frac{1}{N}[X^T(y-t)]_j$ (Since $\frac{1}{N}$ is scalar)\\
+\\
+\indent \indent Let $w = y-t$ where w is a vector and $w_i = y^{(i)} - t^{(i)}$\\
+\indent \indent $=\frac{1}{N}[X^Tw]_j$\\
+\\
+\indent \indent Since y and t are both mx1 vectors, w is mx1, then $X^T$ is nxm(since X is mxn).\\
+\\
+\indent \indent Therefore $[X^Tw]_j = [X^T]_jw$, since at the $j^{th}$ row of $X^Tw$ is just the $j^{th}$ row of $X^T$ multiplying(matrix wise) w, which should give us a scalar.\\
+\\
+\indent \indent Then,\\
+\indent \indent $\frac{1}{N}[X^Tw]_j = \frac{1}{N}[X^T]_jw$\\
+\\
+\indent \indent $=\frac{1}{N}(\sum_{i=1}^{M}[X^T]_{ji}w_i)$ (definition of matrix multiplication)\\
+\\
+\indent \indent $=\frac{1}{N}(\sum_{i=1}^{M}X_{ij}w_i)$ (definition of matrix transpose)\\
+\\
+\indent \indent $=\frac{1}{N}(\sum_{i=1}^{M}X_j^{(i)}w_i)$ ($X_ij = x_j^{i}$ given)\\
+\\
+\indent \indent $=\frac{1}{N}(\sum_{i=1}^{M}X_j^{(i)}(y^{(i)}-w^{(i)}))$ (definition of w)\\
+\\
+\indent \indent $=\frac{\partial \mathcal{J}}{\partial w_j}$\\
+\\
+\indent \indent And notice, we have used only equivalence signs(=) for our proof, and all the definitions have the if-and-only-if property (the meaning of definition).\\
+\indent \indent So, assuming without-loss-of-generality, we can also state that given the consequence, we can use this exact logic to show the assumption holds.\\
+\\
+\indent \indent Therefore, we have proven the claim as required.\\
+\\
+Q4(e).\\
+\indent \indent Consider,\\
+\\
+\indent \indent $\mathcal{L}_{LCE}(z,t) = \mathcal{L}_{CE}(\sigma(z),t)$ (definition of logistic-cross-entropy)\\
+\\
+\indent \indent $=-t\:log\:\sigma(z)-(1-t)log(1-\sigma(z))$ (definition of $\mathcal{L}_{CE}$)\\
+\\
+\indent \indent $=-t\:log(\frac{1}{1+e^{-z}}) - (1-t)log(1-\frac{1}{1+e^{-z}})$ (definition of $\sigma$)\\
+\\
+\indent \indent $=-t\:log(1) - log(1+e^{-z}) - (1-t)log(\frac{1+e^{-z}-1}{1+e^{-z}})$ (log rule)\\
+\\
+\indent \indent $=-t[-log(1+e^{-z})]-(1-t)[log(e^{-z})-log(1+e^{-z})]$ (log1 = 0)\\
+\\
+\indent \indent $=t\:log(1+e^{-z})-(1-t)[-z-log(1+e^{-z})]$ ($log_bb^a=a$)\\
+\\
+\indent \indent $=t\:log(1+e^{-z})-(1-t)[-z-log(1+\frac{1}{e^z})]$ ($e^{-z} = \frac{1}{e^z}$)\\
+\\
+\indent \indent $=t\:log(1+e^{-z})-(1-t)[z-log(\frac{e^z+1}{e^z})]$\\
+\\
+\indent \indent $=t\:log(1+e^{-z})-(1-t)[z-log(1+e^z)-log(e^z)]$ (log rule)\\
+\\
+\indent \indent $=t\:log(1+e^{-z})-(1-t)[z-log(1+e^z)-z]$ ($log_bb^a=a$)\\
+\\
+\indent \indent $=t\:log(1+e^{-z})-(1-t)[-log(1+e^z)]$\\
+\\
+\indent \indent $=t\:log(1+e^{-z})+(1-t)[log(1+e^z)]$\\
+\\
+Q6(e).\\
+\indent \indent Consider the image of "5" and "6", they are more similar in hand-writing in comparison to "4" and "7" (where the only difference between "5" and "6" is whether there would be a gap after the final left curl).\\
+\\
+\indent \indent The reason why the validation accuracy of part (d) is better than part (c) is because we are using a larger value of K, so our algorithm becomes more resilient to noise and outliers.\\
+\\
+\indent \indent For the best value of K, by having a larger K to try to distinguish "5" and "6" will only confuses the algorithm, as the hand-writings are so similar, yet the values are somewhat arbitrary and misleading.\\
+\\
+Q6(f).\\
+\indent \indent Given that we are solving a binary-classification problem, we only use odd value for K because if we use an even number for K, and half the neighbours are class 0 and the other half are class 1(binary data), then we won't be able to determine the class of the current data point.\\
+\\
+\indent \indent Therefore, an odd number for K is necessary.\\
+\\
+Q6(g).\\
+\indent \indent The reason why KNN performs well on MNIST data, is because MNIST data is highly-preprocessed (grey scaling,thresholding...), and the data set is fairly simple (with the target being an integer 0 to 9).\\
+\\
+\indent \indent When reducing the target down to only 2 (binary classification), we have also eliminated all the noise data in the data set (ex. in part (d), hand-writing of "4" is similar to "9", but we made a reduction data so only "4" and "7" exists) which helps greatly with the increasing the accuracy.\\
+\\
+}
+
+\begin{center}
+    End of Assignment
+\end{center}
+
+\end{document}
