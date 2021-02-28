@@ -4,7 +4,8 @@
 CSC311 is the introductory machine learning course taught at UofT, where we use various python packages to implement the popular machine learning algorithm
 and proving their correctness.
 
-CSC311 Course Description:
+**CSC311 Course Description:**
+
 This course is a broad introduction to machine learning.  It will start with basic methods of regression and classification and problems of over fitting and 
 the evaluation of learning algorithms, and then move on to more sophisticated methods such as neural networks.
 
